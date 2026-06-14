@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    .login-container{
+        max-width:500px;
+        margin:60px auto;
+    }
+
+    .login-card{
+        background:white;
+        padding:40px;
+        border-radius:25px;
+        box-shadow:0 15px 35px rgba(255,79,163,0.15);
+    }
+
+    .login-title{
+        text-align:center;
+        color:#ff4fa3;
+        font-weight:800;
+        margin-bottom:10px;
+    }
+
+    .login-subtitle{
+        text-align:center;
+        color:#222222;
+        font-size:14px;
+        margin-bottom:30px;
+    }
+
+    .form-control{
+        border-radius:15px;
+        padding:14px;
+        border:2px solid #ffd6e8;
+        font-weight:600;
+    }
+
+    .form-control:focus{
+        border-color:#ff69b4;
+        box-shadow:0 0 10px rgba(255,105,180,0.2);
+    }
+
+    .btn-login{
+        width:100%;
+        background:linear-gradient(
+            135deg,
+            #ff4fa3,
+            #ff69b4
+        );
+        color:white;
+        border:none;
+        border-radius:15px;
+        padding:14px;
+        font-weight:700;
+        transition:.3s;
+    }
+
+    .btn-login:hover{
+        transform:translateY(-3px);
+        box-shadow:0 10px 20px rgba(255,79,163,0.25);
+    }
+
+</style>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h2 class="login-title">
+            Welcome Back 
+        </h2>
+
+        <p class="login-subtitle">
+            Login to your CareerBridge account
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="username"
+                class="form-control mb-3"
+                placeholder="Enter Username"
+            >
+
+            <input
+                type="password"
+                name="password"
+                class="form-control mb-4"
+                placeholder="Enter Password"
+            >
+
+            <button class="btn-login">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

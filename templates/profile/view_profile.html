@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    .profile-container{
+        max-width:900px;
+        margin:50px auto;
+    }
+
+    .profile-card{
+        background:white;
+        border-radius:30px;
+        padding:40px;
+        box-shadow:0 15px 35px rgba(255,79,163,0.15);
+    }
+
+    .profile-header{
+        text-align:center;
+        margin-bottom:35px;
+    }
+
+    .profile-avatar{
+        width:120px;
+        height:120px;
+        background:linear-gradient(
+            135deg,
+            #ff4fa3,
+            #ff69b4
+        );
+        border-radius:50%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:45px;
+        color:white;
+        margin:0 auto 20px;
+        font-weight:700;
+    }
+
+    .profile-title{
+        color:#ff4fa3;
+        font-size:2.5rem;
+        font-weight:800;
+        margin-bottom:5px;
+    }
+
+    .profile-subtitle{
+        color:#222222;
+        font-size:14px;
+    }
+
+    .profile-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+        gap:20px;
+    }
+
+    .info-card{
+        background:#fff7fb;
+        border:2px solid #ffd6e8;
+        border-radius:20px;
+        padding:20px;
+        transition:.3s;
+    }
+
+    .info-card:hover{
+        transform:translateY(-5px);
+        box-shadow:0 10px 20px rgba(255,79,163,0.15);
+    }
+
+    .info-label{
+        color:#ff4fa3;
+        font-weight:700;
+        margin-bottom:8px;
+    }
+
+    .info-value{
+        color:#222222;
+        font-weight:600;
+        word-break:break-word;
+    }
+
+    .action-section{
+        margin-top:35px;
+        text-align:center;
+    }
+
+    .btn-profile{
+        display:inline-block;
+        padding:14px 30px;
+        border:none;
+        border-radius:15px;
+        background:linear-gradient(
+            135deg,
+            #ff4fa3,
+            #ff69b4
+        );
+        color:white;
+        text-decoration:none;
+        font-weight:700;
+        transition:.3s;
+        margin:5px;
+    }
+
+    .btn-profile:hover{
+        color:white;
+        transform:translateY(-3px);
+        box-shadow:0 10px 20px rgba(255,79,163,0.25);
+    }
+
+</style>
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                {{ profile.user.username|first|upper }}
+            </div>
+
+            <h2 class="profile-title">
+                My Profile 
+            </h2>
+
+            <p class="profile-subtitle">
+                Your CareerBridge Professional Profile
+            </p>
+
+        </div>
+
+        <div class="profile-grid">
+
+            <div class="info-card">
+                <div class="info-label">Name</div>
+                <div class="info-value">
+                    {{ profile.user.username }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Phone</div>
+                <div class="info-value">
+                    {{ profile.phone }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Location</div>
+                <div class="info-value">
+                    {{ profile.location }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Qualification</div>
+                <div class="info-value">
+                    {{ profile.qualification }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">College</div>
+                <div class="info-value">
+                    {{ profile.college }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Skills</div>
+                <div class="info-value">
+                    {{ profile.skills }}
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">Preferred Role</div>
+                <div class="info-value">
+                    {{ profile.preferred_job_role }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="action-section">
+
+            {% if profile.resume %}
+            <a href="{{ profile.resume.url }}"
+               target="_blank"
+               class="btn-profile">
+                 View Resume
+            </a>
+            {% endif %}
+
+            <a href="{% url 'edit_profile' %}"
+               class="btn-profile">
+                Edit Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

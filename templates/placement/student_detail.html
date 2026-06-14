@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>
+{{ student.user }}
+</h2>
+<hr>
+<h4>
+Personal Details
+</h4>
+<p>Email:
+{{ student.email }}
+</p>
+<p>Phone:
+{{ student.phone }}
+</p>
+<hr>
+<h4>
+Skills
+</h4>
+<p>
+{{ student.skills }}
+</p>
+<hr>
+<h4>
+Preferred Job Roles
+</h4>
+<p>
+{{ student.preferred_job_role }}
+</p>
+<hr>
+<h4>Resume</h4>
+
+{% if student.resume %}
+    <a
+        href="{{ student.resume.url }}"
+        class="btn btn-success"
+        download
+    >
+        Download Resume
+    </a>
+{% else %}
+    <p class="text-danger">
+        No resume uploaded.
+    </p>
+{% endif %}
+{% endblock %}

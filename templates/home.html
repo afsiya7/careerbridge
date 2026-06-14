@@ -1,8 +1,240 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Welcome to CareerBridge</h1>
-<p>
-Placement & Recruitment Portal
-for Asquare Technologies.
-</p>
+
+<style>
+    
+
+    .hero-section{
+        background:white;
+        border-radius:30px;
+        padding:70px 50px;
+        text-align:center;
+        box-shadow:0 15px 40px rgba(255,79,163,0.15);
+        margin-top:30px;
+    }
+
+    .hero-badge{
+        display:inline-block;
+        background:#ffd6e8;
+        color:#ff4fa3;
+        font-weight:700;
+        padding:10px 20px;
+        border-radius:30px;
+        margin-bottom:20px;
+    }
+
+    .hero-title{
+        font-size:3.5rem;
+        font-weight:800;
+        color:#ff4fa3;
+        margin-bottom:20px;
+    }
+
+    .hero-title span{
+        color:#222222;
+    }
+
+    .hero-text{
+        font-size:1.1rem;
+        color:#222222;
+        max-width:700px;
+        margin:auto;
+        line-height:1.8;
+    }
+
+    .hero-buttons{
+        margin-top:35px;
+    }
+
+    .btn-start{
+        background:linear-gradient(
+            135deg,
+            #ff4fa3,
+            #ff69b4
+        );
+        color:white;
+        padding:14px 35px;
+        border:none;
+        border-radius:15px;
+        font-weight:700;
+        text-decoration:none;
+        margin-right:10px;
+        transition:.3s;
+    }
+
+    .btn-start:hover{
+        color:white;
+        transform:translateY(-3px);
+        box-shadow:0 10px 25px rgba(255,79,163,0.35);
+    }
+
+    .btn-learn{
+        background:white;
+        color:#222222;
+        border:2px solid #ff69b4;
+        padding:14px 35px;
+        border-radius:15px;
+        font-weight:700;
+        text-decoration:none;
+        transition:.3s;
+    }
+
+    .btn-learn:hover{
+        background:#ff69b4;
+        color:white;
+    }
+
+    .feature-section{
+        margin-top:50px;
+    }
+
+    .feature-card{
+        background:white;
+        border-radius:25px;
+        padding:30px;
+        text-align:center;
+        box-shadow:0 10px 25px rgba(255,79,163,0.12);
+        transition:.3s;
+        height:100%;
+    }
+
+    .feature-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .feature-icon{
+        font-size:45px;
+        margin-bottom:15px;
+    }
+
+    .feature-title{
+        color:#ff4fa3;
+        font-weight:700;
+        margin-bottom:10px;
+    }
+
+    .feature-text{
+        color:#222222;
+        font-size:14px;
+    }
+
+</style>
+
+<div class="hero-section">
+
+    <div class="hero-badge">
+         Smart Placement Platform
+    </div>
+
+    <h1 class="hero-title">
+        Welcome to <span>CareerBridge</span>
+    </h1>
+
+    <p class="hero-text">
+        Placement & Recruitment Portal for Asquare Technologies.
+        Connect talented students with recruiters, showcase skills,
+        build professional profiles, and discover exciting career
+        opportunities through one powerful platform.
+    </p>
+
+    <div class="hero-buttons">
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'dashboard' %}" class="btn-start">
+                Go to Dashboard
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'register' %}" class="btn-start">
+                Get Started
+            </a>
+
+            <a href="{% url 'login' %}" class="btn-learn">
+                Login
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<div class="row feature-section">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                👨‍🎓
+            </div>
+
+            <h4 class="feature-title">
+                Student Profiles
+            </h4>
+
+            <p class="feature-text">
+                Create professional profiles showcasing your skills,
+                experience, projects, and achievements.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💼
+            </div>
+
+            <h4 class="feature-title">
+                Job Opportunities
+            </h4>
+
+            <p class="feature-text">
+                Discover internships and placement opportunities
+                posted by recruiters and companies.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-4">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🎯
+            </div>
+
+            <h4 class="feature-title">
+                Career Growth
+            </h4>
+
+            <p class="feature-text">
+                Match your skills with industry requirements and
+                take the next step in your career journey.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+<a
+href="{% url 'placement_login' %}"
+4
+class="btn btn-dark"
+>
+ Placement Team Login
+</a>
+
+
 {% endblock %}

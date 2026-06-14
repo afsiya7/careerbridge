@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">
+        Student Dashboard
+    </h2>
+
+    <div class="row">
+
+        <!-- Announcements -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5>
+                        Announcements
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% for announcement in announcements %}
+
+                        <div class="mb-3">
+
+                            <strong>
+
+                                {{ announcement.title }}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                {{ announcement.event_date }}
+
+                            </small>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p>
+
+                            No announcements available.
+
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Latest Jobs -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5>
+                        Latest Jobs
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% for job in recent_jobs %}
+
+                        <div class="mb-3">
+
+                            <strong>
+
+                                {{ job.job_title }}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                {{ job.company_name }}
+
+                            </small>
+
+                            <br>
+
+                            <a
+                                href="{% url 'job_detail' job.id %}"
+                                class="btn btn-sm btn-primary mt-2"
+                            >
+                                View
+                            </a>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p>
+
+                            No jobs available.
+
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- My Applications -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5>
+                        My Applications
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% for application in my_applications %}
+
+                        <div class="mb-3">
+
+                            <strong>
+
+                                {{ application.job.job_title }}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                {{ application.job.company_name }}
+
+                            </small>
+
+                            <br>
+
+                            <span
+                                class="badge bg-success"
+                            >
+
+                                {{ application.status }}
+
+                            </span>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p>
+
+                            No applications yet.
+
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

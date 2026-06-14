@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    .dashboard-container{
+        margin-top:30px;
+    }
+
+    .welcome-card{
+        background:white;
+        border-radius:30px;
+        padding:50px;
+        text-align:center;
+        box-shadow:0 15px 35px rgba(255,79,163,0.15);
+        margin-bottom:30px;
+    }
+
+    .welcome-title{
+        font-size:3rem;
+        font-weight:800;
+        color:#ff4fa3;
+        margin-bottom:10px;
+    }
+
+    .welcome-user{
+        color:#222222;
+        font-size:18px;
+        font-weight:600;
+    }
+
+    .dashboard-card{
+        background:white;
+        border-radius:25px;
+        padding:30px;
+        text-align:center;
+        box-shadow:0 10px 25px rgba(255,79,163,0.12);
+        transition:.3s;
+        height:100%;
+    }
+
+    .dashboard-card:hover{
+        transform:translateY(-5px);
+    }
+
+    .card-icon{
+        font-size:45px;
+        margin-bottom:15px;
+    }
+
+    .card-title{
+        color:#ff4fa3;
+        font-weight:700;
+        margin-bottom:10px;
+    }
+
+    .card-text{
+        color:#222222;
+        font-size:14px;
+    }
+
+    .dashboard-btn{
+        display:inline-block;
+        margin-top:15px;
+        padding:10px 20px;
+        background:linear-gradient(
+            135deg,
+            #ff4fa3,
+            #ff69b4
+        );
+        color:white;
+        text-decoration:none;
+        border-radius:12px;
+        font-weight:700;
+        transition:.3s;
+    }
+
+    .dashboard-btn:hover{
+        color:white;
+        transform:translateY(-3px);
+        box-shadow:0 10px 20px rgba(255,79,163,0.25);
+    }
+
+</style>
+
+<div class="dashboard-container">
+    {% if user.is_authenticated %}
+    {% if not user.is_staff %}
+    <div class="container mt-4">
+
+    <h2 class="mb-4">
+        Announcements
+    </h2>
+
+    {% for announcement in announcements %}
+
+    <div class="card mb-3 shadow-sm">
+
+        <div class="card-body">
+
+            <h4>
+
+                {{ announcement.title }}
+
+            </h4>
+
+            {% if announcement.event_date %}
+
+            <p>
+
+                <strong>
+                    Event Date:
+                </strong>
+
+                {{ announcement.event_date }}
+
+            </p>
+
+            {% endif %}
+
+            <p>
+
+                {{ announcement.description }}
+
+            </p>
+
+            <small class="text-muted">
+
+                Posted:
+                {{ announcement.created_at|date:"d M Y" }}
+
+            </small>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="alert alert-info">
+
+        No announcements available.
+
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endif %}
+
+    <div class="welcome-card">
+
+        <h1 class="welcome-title">
+            Dashboard 
+        </h1>
+
+        <p class="welcome-user">
+            Welcome, {{ request.user.username }}
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    
+                </div>
+
+                <h4 class="card-title">
+                    My Profile
+                </h4>
+
+                <p class="card-text">
+                    View and manage your professional profile.
+                </p>
+
+                <a href="{% url 'view_profile' %}"
+                   class="dashboard-btn">
+                    View Profile
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    
+                </div>
+
+                <h4 class="card-title">
+                    Edit Profile
+                </h4>
+
+                <p class="card-text">
+                    Update your skills, resume, and details.
+                </p>
+
+                <a href="{% url 'edit_profile' %}"
+                   class="dashboard-btn">
+                    Edit Now
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    
+                </div>
+
+                <h4 class="card-title">
+                    Opportunities
+                </h4>
+
+                <p class="card-text">
+                    Explore jobs and placement opportunities.
+                </p>
+
+                <a href="#"
+                   class="dashboard-btn">
+                    Explore
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4" style="max-width: 550px;">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0"> Update Application Status</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Job:</strong> {{ application.job.job_title }}</p>
+      <p><strong>Company:</strong> {{ application.job.company_name }}</p>
+      <p><strong>Current Status:</strong>
+        <span class="badge bg-primary">{{ application.status }}</span>
+      </p>
+      <hr>
+
+      <!-- Status Timeline -->
+      <p class="text-muted small mb-3">
+        Applied → Call Received → Interview Scheduled → Interview Attended → Offer Received → Joined
+      </p>
+
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label fw-bold">Select New Status</label>
+          <select name="status" class="form-select">
+            {% for value, label in status_choices %}
+            <option value="{{ value }}"
+              {% if application.status == value %}selected{% endif %}>
+              {{ label }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-success">Save Status</button>
+          <a href="{% url 'my_applications' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

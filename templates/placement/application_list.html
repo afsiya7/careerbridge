@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid mt-4">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-2">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white text-center">
+          <strong>Placement Panel</strong>
+        </div>
+        <div class="list-group list-group-flush">
+          <a href="{% url 'placement_dashboard' %}" class="list-group-item list-group-item-action">Dashboard</a>
+          <a href="{% url 'student_list' %}" class="list-group-item list-group-item-action">Students</a>
+          <a href="{% url 'job_list' %}" class="list-group-item list-group-item-action">Jobs</a>
+          <a href="{% url 'application_list' %}" class="list-group-item list-group-item-action active">Applications</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-10">
+      <h3 class="mb-4">All Applications</h3>
+
+      <!-- Summary Badges -->
+      <div class="mb-3 d-flex gap-2 flex-wrap">
+        <span class="badge bg-secondary fs-6">Total: {{ applications|length }}</span>
+        {% for app in applications %}{% endfor %}
+      </div>
+
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Status</th>
+            <th>Applied On</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for app in applications %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              <a href="{% url 'student_detail' app.student.id %}">
+                {{ app.student.user.get_full_name|default:app.student.user.username }}
+              </a>
+            </td>
+            <td>{{ app.job.job_title }}</td>
+            <td>{{ app.job.company_name }}</td>
+            <td>
+              {% if app.status == 'Applied' %}
+                <span class="badge bg-secondary">{{ app.status }}</span>
+              {% elif app.status == 'Call Received' %}
+                <span class="badge bg-info text-dark">{{ app.status }}</span>
+              {% elif app.status == 'Interview Scheduled' %}
+                <span class="badge bg-primary">{{ app.status }}</span>
+              {% elif app.status == 'Interview Attended' %}
+                <span class="badge bg-warning text-dark">{{ app.status }}</span>
+              {% elif app.status == 'Offer Received' %}
+                <span class="badge bg-success">{{ app.status }}</span>
+              {% elif app.status == 'Joined' %}
+                <span class="badge bg-dark">{{ app.status }}</span>
+              {% endif %}
+            </td>
+            <td>{{ app.applied_on|date:"d M Y" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center text-muted">No applications yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>
+All Student Profiles
+</h2>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>Name</th>
+<th>Skills</th>
+<th>Preferred Roles</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+{% for student in students %}
+<tr>
+<td>
+{{ student.user }}
+</td>
+<td>
+{{ student.skills }}
+</td>
+<td>
+{{ student.preferred_job_role }}
+</td>
+<td>
+<a
+href="{% url 'student_detail' student.id %}"
+class="btn btn-primary btn-sm"
+>
+View
+</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
